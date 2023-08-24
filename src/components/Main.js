@@ -1,7 +1,5 @@
 import React from 'react'
 import InvoiceTable from './Table'
-import AddTr from './AddTr'
-import Impression from '../impression'
 import TotalDisc from './TotalDisc'
 
 const Main = () => {
@@ -9,7 +7,7 @@ const Main = () => {
      <div className='container-xxl'>
     <InvoiceTable/>
 
-    <AddTr/>
+  
     <TotalDisc/>
     </div>
   )

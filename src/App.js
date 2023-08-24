@@ -5,7 +5,7 @@ import './App.css';
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import InvoiceForm from "./components/Form";
-
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
   <BrowserRouter>

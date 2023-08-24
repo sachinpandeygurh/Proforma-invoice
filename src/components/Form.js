@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
 
 function InvoiceForm() {
   const [itemname, setItemname] = useState('');
@@ -20,24 +21,28 @@ function InvoiceForm() {
     try {
       const result = await fetch(`http://localhost:5001/api/InvoiceData`, {
         method: 'post',
-        body: JSON.stringify({ itemname, quantity, rate }),
+        body: JSON.stringify({ itemname, quantity, rate , disc}),
         headers: { 'Content-Type': 'application/json' },
       });
 
       const data = await result.json();
 
       if (!itemname || !quantity || !rate) {
-        alert('All fields are mandatory to be filled');
+        toast.alert('All fields are mandatory to be filled');
+
       } else {
         navigate('/');
       }
     } catch (error) {
       console.error('An error occurred:', error);
+      toast.error('An error occurred:' , error.status);
+
     }
   };
 
   return (
     <Form className="container card my-5 w-50 py-2 px-2" onSubmit={handleSubmit}>
+     <ToastContainer/>
       <Link className="px-3" to="/">
         <Form.Label>
           <FontAwesomeIcon icon={faArrowLeft} /> Back To Home
@@ -79,14 +84,14 @@ function InvoiceForm() {
           placeholder="Enter Description "
         />
       </Form.Group>
-      <Form.Group className="mb-3">
+      {/* <Form.Group className="mb-3">
         <Form.Label>Impression (Optional)</Form.Label>
         <Form.Control
           type="file"
           onChange={(e) => setPhoto(e.target.files[0])}
           placeholder="Upload File"
         />
-      </Form.Group>
+      </Form.Group> */}
 
       <Button className="w-25 m-auto" variant="primary" type="submit">
         Submit
