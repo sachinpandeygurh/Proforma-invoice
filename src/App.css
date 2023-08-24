@@ -1,9 +1,12 @@
 .App {
+  position: relative;
   text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
+  position: absolute;
+  left: 1em;
+  height: 10vmin;
   pointer-events: none;
 }
 
@@ -14,8 +17,8 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: yellowgreen;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +38,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+.bg-brand{
+  background:#733dd9 !important;
+}
+
+.text-brand{
+  color:#733dd9 !important;
+}
+.boder-dott{
+  border: 1px dotted rgba(128, 128, 128, 0.482) !important;
 }
