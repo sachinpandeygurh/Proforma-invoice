@@ -59,7 +59,7 @@ function InvoiceTable({ items }) {
               <td>{item.itemname}</td>
               <td>{item.quantity}</td>
               <td>{item.rate}</td>
-              <td>{item.quantity * item.rate}</td>
+              <td>&#8377;{` ${item.quantity * item.rate}`}</td>
               <td>
                 <FontAwesomeIcon
                   id={item._id}
@@ -74,7 +74,7 @@ function InvoiceTable({ items }) {
                 <div className="d-flex justify-content-between align-items-center">
                   <p className="m-0">
                     <FontAwesomeIcon icon={faSquarePlus} className="text-brand mr-2" />
-                   <span className="px-2"> Discriptions </span>
+                   <span className="px-2"> {item.disc} </span>
                   </p>
                   <p className="m-0">
                     <FontAwesomeIcon icon={faImage} className="text-brand mr-2" />
