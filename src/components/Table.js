@@ -2,9 +2,17 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { faTimes, faSquarePlus, faImage, faFileAlt, faArrowDown, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTimes,
+  faSquarePlus,
+  faImage,
+  faFileAlt,
+  faArrowDown,
+  faPenToSquare,
+} from "@fortawesome/free-solid-svg-icons";
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function InvoiceTable({ items }) {
   const [data, setData] = useState([]);
@@ -12,13 +20,13 @@ function InvoiceTable({ items }) {
 
   useEffect(() => {
     getInvoice();
-  }, [flag , data]);
+  }, [flag, data]);
 
   const getInvoice = async () => {
     try {
       const invoice = await axios.get(`http://localhost:5001/api/InvoiceData`);
       setData(invoice?.data);
-      console.warn(invoice?.data);
+      // console.warn(invoice?.data);
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -37,15 +45,14 @@ function InvoiceTable({ items }) {
       if (res.status === 200) {
         setFlag(!flag);
         // console.log("Document deleted successfully");
-         toast.success('Document deleted successfully');
+        toast.success("Document deleted successfully");
       } else {
         console.error("Error deleting document");
-       toast.error('Error deleting document');
+        toast.error("Error deleting document");
       }
     } catch (error) {
       console.error("An error occurred:", error);
-        toast.error('An error occurred: ' + error.message);
-
+      toast.error("An error occurred: " + error.message);
     }
   };
   function formatDate(dateString) {
@@ -53,13 +60,13 @@ function InvoiceTable({ items }) {
     const day = date.getUTCDate();
     const month = date.getUTCMonth() + 1;
     const year = date.getUTCFullYear();
-  
+
     return `${day}-${month}-${year}`;
   }
-  
+
   return (
     <Table striped bordered hover className="mt-3 container">
-       <ToastContainer />
+      <ToastContainer />
       <thead>
         <tr>
           <th className="bg-brand text-white px-2">S no.</th>
@@ -88,29 +95,42 @@ function InvoiceTable({ items }) {
                   className="text-brand mx-md-5"
                   icon={faTimes}
                 />
-                <FontAwesomeIcon
-                  id={item._id}
-                  // onClick={() => onDelete(item._id)}
-                  className="text-brand mx-md-5"
-                  icon={faPenToSquare}
-                />
+                <Link to={`update/${item._id}`}>
+                  <FontAwesomeIcon
+                    id={item._id}
+                    className="text-brand mx-md-5"
+                    icon={faPenToSquare}
+                  />
+                </Link>
               </td>
             </tr>
             <tr>
               <td colSpan="7">
                 <div className="d-flex justify-content-between align-items-center">
                   <p className="m-0">
-                    <FontAwesomeIcon icon={faSquarePlus} className="text-brand mr-2" />
-                   <span className="px-2"> {item.disc} </span>
+                    <FontAwesomeIcon
+                      icon={faSquarePlus}
+                      className="text-brand mr-2"
+                    />
+                    <span className="px-2"> {item.disc} </span>
                   </p>
                   <p className="m-0">
-                    <FontAwesomeIcon icon={faImage} className="text-brand mr-2" />
-                   <span className="px-2"> Impression </span>
+                    <FontAwesomeIcon
+                      icon={faImage}
+                      className="text-brand mr-2"
+                    />
+                    <span className="px-2"> Impression </span>
                   </p>
                   <p className="m-0">
-                    <FontAwesomeIcon icon={faFileAlt} className="text-brand mr-2" />
-                   <span className="px-2"> Insert an item below </span>
-                    <FontAwesomeIcon icon={faArrowDown} className="text-brand ml-2" />
+                    <FontAwesomeIcon
+                      icon={faFileAlt}
+                      className="text-brand mr-2"
+                    />
+                    <span className="px-2"> Insert an item below </span>
+                    <FontAwesomeIcon
+                      icon={faArrowDown}
+                      className="text-brand ml-2"
+                    />
                   </p>
                 </div>
               </td>

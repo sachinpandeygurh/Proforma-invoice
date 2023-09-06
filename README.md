@@ -41,7 +41,7 @@ Your app is ready to be deployed!
 The backend follows a Model-View-Controller (MVC) architecture:
 
 ```
-project-folder/
+backend/
 |-- controllers/
 |   |-- invoiceController.js
 |

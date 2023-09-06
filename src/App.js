@@ -6,6 +6,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import InvoiceForm from "./components/Form";
 import 'react-toastify/dist/ReactToastify.css';
+import UpdateForm from "./components/UpdateForm";
 function App() {
   return (
   <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
   <Footer/>
   </>} />
   <Route  path="/add" element={<InvoiceForm/>} />
+  <Route  path="/update/:id" element={<UpdateForm/>} />
   </Routes>
   
   </BrowserRouter>
