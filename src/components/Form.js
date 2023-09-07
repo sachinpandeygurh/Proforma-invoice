@@ -21,11 +21,12 @@ function InvoiceForm() {
     try {
       const result = await fetch(`http://localhost:5001/api/InvoiceData`, {
         method: 'post',
-        body: JSON.stringify({ itemname, quantity, rate , disc}),
+        body: JSON.stringify({ itemname, quantity, rate , disc ,photo}),
         headers: { 'Content-Type': 'application/json' },
       });
 
       const data = await result.json();
+      console.log(data)
 
       if (!itemname || !quantity || !rate) {
         toast.alert('All fields are mandatory to be filled');
@@ -84,14 +85,15 @@ function InvoiceForm() {
           placeholder="Enter Description "
         />
       </Form.Group>
-      {/* <Form.Group className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Impression (Optional)</Form.Label>
         <Form.Control
           type="file"
           onChange={(e) => setPhoto(e.target.files[0])}
-          placeholder="Upload File"
+          name='photo'
+          // value={photo}
         />
-      </Form.Group> */}
+      </Form.Group> 
 
       <Button className="w-25 m-auto" variant="primary" type="submit">
         Submit

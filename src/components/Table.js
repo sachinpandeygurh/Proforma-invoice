@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modal from "@mui/material/Modal";
 import axios from "axios";
 import {
   faTimes,
@@ -13,6 +14,7 @@ import {
 
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import Invoice from "./Invoice";
 
 function InvoiceTable({ items }) {
   const [data, setData] = useState([]);
@@ -64,6 +66,16 @@ function InvoiceTable({ items }) {
     return `${day}-${month}-${year}`;
   }
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  console.log(handleOpen);
   return (
     <Table striped bordered hover className="mt-3 container">
       <ToastContainer />
@@ -114,13 +126,38 @@ function InvoiceTable({ items }) {
                     />
                     <span className="px-2"> {item.disc} </span>
                   </p>
-                  <p className="m-0">
+                  <Link
+                    className="m-0 text-decoration-none text-brand"
+                    //  to={`https://res.cloudinary.com/brandads-tech/image/upload/v1661116706/cld-sample-5.jpg`}
+                    onClick={handleOpen}
+                  >
                     <FontAwesomeIcon
                       icon={faImage}
                       className="text-brand mr-2"
                     />
                     <span className="px-2"> Impression </span>
-                  </p>
+                  </Link>
+                  {/* <Invoice/> */}
+                  <Modal
+                    onClose={handleClose}
+                    open={open}
+                    style={{
+                      position: "absolute",
+                      border: "2px solid #000",
+                      backgroundColor: "gray",
+                      boxShadow: "2px solid black",
+                      height: 400,
+                      width: 240,
+                      margin: "auto",
+                    }}
+                  >
+                    <img
+                      height="400"
+                      width="240"
+                      src="https://res.cloudinary.com/brandads-tech/image/upload/v1661116692/samples/ecommerce/leather-bag-gray.jpg"
+                      alt="img"
+                    />
+                  </Modal>
                   <p className="m-0">
                     <FontAwesomeIcon
                       icon={faFileAlt}
