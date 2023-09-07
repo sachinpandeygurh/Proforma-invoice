@@ -47,19 +47,21 @@ const UpdateForm = () => {
     e.preventDefault();
   
     try {
-      const result = await axios.put(`http://localhost:5001/api/InvoiceData/${id}`, {
-        itemData,
-        headers: { "Content-Type": "application/json" },
+      const result = await axios.put(`http://localhost:5001/api/InvoiceData/${id}`, itemData ,{
+        headers: { "Content-Type": "application/json" }
       });
   
+      // console.log(result.data); 
       toast.success(result.data.message);
-      // navigate("/");
+      setTimeout(()  => {
+        
+        navigate("/");
+      }, 1000);
     } catch (error) {
       console.error('An error occurred:', error);
       toast.error(error.message);
     }
   };
-  
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -68,6 +70,7 @@ const UpdateForm = () => {
       [name]: value,
     });
   };
+  
 
   return (
     <Form className="container card my-5 w-50 py-2 px-2" onSubmit={handleSubmit}>
